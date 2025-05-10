@@ -1,0 +1,73 @@
+services:
+  # User Service
+  user-service:
+    build:
+      context: ./user-service
+      dockerfile: Dockerfile
+    container_name: user-service
+    ports:
+      - "3000:3000"
+    networks:
+      - microservices-net
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+
+  # Product Service
+  product-service:
+    build:
+      context: ./product-service
+      dockerfile: Dockerfile
+    container_name: product-service
+    ports:
+      - "3001:3001"
+    networks:
+      - microservices-net
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+
+  # Order Service
+  order-service:
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+    container_name: order-service
+    ports:
+      - "3002:3002"
+    networks:
+      - microservices-net
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+
+  # Gateway Service
+  gateway-service:
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile
+    container_name: gateway-service
+    ports:
+      - "3003:3003"
+    networks:
+      - microservices-net
+    environment:
+      - USER_SERVICE_URL=http://user-service:3000
+      - PRODUCT_SERVICE_URL=http://product-service:3001
+      - ORDER_SERVICE_URL=http://order-service:3002
+      - NODE_ENV=development
+    depends_on:
+      - user-service
+      - product-service
+      - order-service
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+# Network configuration		
+networks:
+  microservices-net:
+    driver: bridge

@@ -66,3 +66,7 @@ This document provides details on testing various services after running the `do
 2. Once the services are running, use the above endpoints to verify the functionality.
 
 Happy testing!
+
+## Solution 
+
+For solution and detailed steps refer [Solution Documentation](https://github.com/Rakesh095-dvops/Microservices-Task/blob/main/ReadmeSol.md)

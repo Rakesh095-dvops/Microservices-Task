@@ -23,3 +23,8 @@ Create a Dockerfile for each service and test it individually.
 >1. Create ```docker network create myapp-network``` and run each container again against that network to make gateway api works. 
 >2. Sample example ```docker run -d --network myapp-network -p 3003:3003 --name gateway-service-container gateway-service```
 
+##  Docker Compose Creation,Build and Test 
+
+
+
+

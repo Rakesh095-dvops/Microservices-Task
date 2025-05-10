@@ -36,21 +36,21 @@ docker run -d -p 3003:3003 --name gateway-service-container gateway-service
 ```
 
 ### 1.1. User-service 
-![alt text](Microservices/images/image.png)
-![alt text](Microservices/images/image-1.png)
+![alt text](images/image.png)
+![alt text](images/image-1.png)
 
 ### 1.2. Product-service
 
-![alt text](Microservices/images/0_docker_product_build.png)
-![alt text](Microservices/images/0_docker_product_tst.png)
+![alt text](images/0_docker_product_build.png)
+![alt text](images/0_docker_product_tst.png)
 
 ### 1.3. Order-service
-![alt text](Microservices/images/1_docker_order_build.png)
-![alt text](Microservices/images/1_docker_order_test.png)
+![alt text](images/1_docker_order_build.png)
+![alt text](images/1_docker_order_test.png)
 
 ### 1.4. Gateway-service
-![alt text](Microservices/images/2_docker_gateway_build.png)
-![alt text](Microservices/images/2_docker_gateway_test.png)
+![alt text](images/2_docker_gateway_build.png)
+![alt text](images/2_docker_gateway_test.png)
 
 > ***Note*** - ```curl http://localhost:3003/api/users``` or any other gateway service result in error as each container is hosted on its own container network. 
 >1. Create ```docker network create myapp-network``` and run each container again against that network to make gateway api works. 
@@ -87,19 +87,19 @@ docker-compose up -d user-service
 docker exec -it user-service sh
 ls /usr/src/app
 # Check health status specifically
-docker inspect --format='{{json .State.Health}}' user-service-container
+docker inspect --format='{{json .State.Health}}' user-service
 #Clean Up Docker Cache
-docker-compose down --rmi all --volumes --remove-orphans
+docker-compose down --rmi all --volumes --remove-orphans 
 docker-compose build --no-cache
 docker-compose up
 ```
 ### 2.2. Successful build using docker-compose
-![alt text](Microservices/images/3_docker_compose_build.png)
+![alt text](images/3_docker_compose_build.png)
 ### 2.3. Verified all containers are running 
-![alt text](Microservices/images/3_docker_compose_check_ps.png)
+![alt text](images/3_docker_compose_check_ps.png)
 ### 2.4. View logs for all services
-![alt text](Microservices/images/3_docker_compose_logs.png)
+![alt text](images/3_docker_compose_logs.png)
 ### 2.5. Test each microservice using curl 
-![alt text](Microservices/images/3_nodejs_apptest_usingcurl.png)
+![alt text](images/3_nodejs_apptest_usingcurl.png)
 ### 2.6. Terminate the docker compose
-![alt text](Microservices/images/3_docker_compose_down.png)
+![alt text](images/3_docker_compose_down.png)

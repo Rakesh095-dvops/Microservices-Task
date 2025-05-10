@@ -12,6 +12,12 @@ services:
     environment:
       - NODE_ENV=development
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
   # Product Service
   product-service:
@@ -26,6 +32,12 @@ services:
     environment:
       - NODE_ENV=development
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
   # Order Service
   order-service:
@@ -40,6 +52,12 @@ services:
     environment:
       - NODE_ENV=development
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
   # Gateway Service
   gateway-service:
@@ -66,6 +84,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+      start_period: 60s
 
 # Network configuration		
 networks:

@@ -5,6 +5,36 @@ This ```md``` file contains detailed steps how to build micro service using Dock
 ## 1. Dockerfile Creation,Build and Test 
 Create a Dockerfile for each service and test it individually.
 
+### Build Container 
+```bash
+# Build User Service
+docker build -t user-service .
+
+# Build Product Service
+docker build -t product-service .
+
+# Build Order Service
+docker build -t order-service .
+
+# Build Gateway Service
+docker build -t gateway-service .
+```
+
+### Run the container 
+```bash
+# Run User Service
+docker run -d -p 3000:3000 --name user-service-container user-service
+
+# Run Product Service
+docker run -d -p 3001:3001 --name product-service-container product-service
+
+# Run Order Service
+docker run -d -p 3002:3002 --name order-service-container order-service
+
+# Run Gateway Service
+docker run -d -p 3003:3003 --name gateway-service-container gateway-service
+```
+
 ### 1.1. User-service 
 ![alt text](Microservices/images/image.png)
 ![alt text](Microservices/images/image-1.png)
@@ -56,6 +86,8 @@ docker build --no-cache -t user-service ./user-service
 docker-compose up -d user-service
 docker exec -it user-service sh
 ls /usr/src/app
+# Check health status specifically
+docker inspect --format='{{json .State.Health}}' user-service-container
 #Clean Up Docker Cache
 docker-compose down --rmi all --volumes --remove-orphans
 docker-compose build --no-cache

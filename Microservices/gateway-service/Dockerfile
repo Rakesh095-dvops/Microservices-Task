@@ -1,6 +1,9 @@
 # Gateway Service Dockerfile
 FROM node:16-alpine
 
+# Install curl for health checks
+RUN apk add --no-cache curl
+
 # Set working directory
 WORKDIR /usr/src/app
 
@@ -15,6 +18,9 @@ COPY . .
 
 # Expose the application port
 EXPOSE 3003
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3003/health || exit 1
 
 # Start the application 
 CMD ["npm", "start"]

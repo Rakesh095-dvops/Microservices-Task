@@ -4,5 +4,11 @@
     "dependencies": {
       "express": "^4.17.1",
       "axios": "^0.24.0"
-    }
-  }
+    },
+    "scripts": {
+    "start": "node app.js"
+    },
+    "author": "rakesh",
+    "license": "ISC",
+    "description": "A simple product service microservice"
+}
